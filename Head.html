@@ -1,0 +1,81 @@
+<html>
+<head>
+    <style>
+        body {
+            user-select: none;
+            background-image: url("headbg.png"); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ffcc;
+            text-align: center;
+            overflow: hidden;
+        }
+        .neon-text {
+            font-size: 3.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #003322;
+            margin: 0;
+            vertical-align: 20px ;
+            letter-spacing: 4px;
+        }
+        .sub-text {
+            font-size: 1.1em;
+            margin-top: 15px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            font-family: 'Courier';
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: #00ffcc;
+            margin-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="neon-text" id="typewriter"></h1>
+    <p class="sub-text" id="sub-typewriter"></p>
+    <script>
+        const titleText = "WELCOME TO GESARDO!";
+        const subText = "- Built to disrupt - ";
+
+        function typeWriter(text, elementId, speed, callback) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+        window.onload = function() {
+            typeWriter(titleText, "typewriter", 100, function() {
+                setTimeout(() => {
+                    typeWriter(subText, "sub-typewriter", 100);
+                }, 500);
+            });
+        };
+    </script>
+
+</body>
+</html>
